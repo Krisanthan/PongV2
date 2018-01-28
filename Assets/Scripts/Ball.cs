@@ -18,7 +18,7 @@ public class Ball : MonoBehaviour {
 
 	}
 
-    void ballCollisionMovement(Collider2D col)
+    void ballCollisionMovement(Collision2D col)
     {
         Collider collider = GetComponent<Collider>();
         float y = whereBallHits(transform.position, col.transform.position, collider.bounds.size.y);
@@ -48,7 +48,7 @@ public class Ball : MonoBehaviour {
         // Player 1 or 2
         if ((col.gameObject.name == "Player1" || col.gameObject.name == "Player2"))
         {
-
+            ballCollisionMovement(col);
         }
 
 
