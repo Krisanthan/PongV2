@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ball : MonoBehaviour {
 
@@ -21,7 +22,7 @@ public class Ball : MonoBehaviour {
     void ballCollisionMovement(Collision2D col)
     {
         Collider collider = GetComponent<Collider>();
-        float y = whereBallHits(transform.position, col.transform.position, collider.bounds.size.y);
+        float y = whereBallHits(transform.position, col.transform.position, col.collider.bounds.size.y);
 
         Vector2 direction = new Vector2();
         if(col.gameObject.name == "Player1")
@@ -62,8 +63,25 @@ public class Ball : MonoBehaviour {
         // Left or Right Goal
         if ((col.gameObject.name == "LeftGoal" || col.gameObject.name == "RightGoal"))
         {
+            if(col.gameObject.name == "LeftGoal")
+            {
+                uIScoreUpdate("RightScoreUI");
+            } 
+            if(col.gameObject.name == "RightGoal")
+            {
+                uIScoreUpdate("LeftScoreUI");
+            }
             transform.position = new Vector2(0, 0);
         }
 
+    }
+
+    void uIScoreUpdate(string UItext)
+    {
+        var UIComp = GameObject.Find(UItext).GetComponent<Text>();
+        int score = int.Parse(UIComp.text);
+        score++;
+
+        UIComp.text = score.ToString();
     }
 }
