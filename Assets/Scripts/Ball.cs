@@ -46,32 +46,25 @@ public class Ball : MonoBehaviour {
 
     void onCollision(Collision2D col)
     {
-        // Player 1 or 2
-        if ((col.gameObject.name == "Player1" || col.gameObject.name == "Player2"))
+        // If the LeftPaddle or RightPaddle hit the
+        // ball simulate the ricochet
+        if ((col.gameObject.name == "Player1") || (col.gameObject.name == "Player2"))
         {
             ballCollisionMovement(col);
         }
 
-
-        // Top or Bottom Wall
-        if ((col.gameObject.name == "BottomWall" || col.gameObject.name == "TopWall"))
+        // WallBottom or WallTop
+        if ((col.gameObject.name == "BottomWall") || (col.gameObject.name == "TopWall"))
         {
 
         }
 
-
-        // Left or Right Goal
-        if ((col.gameObject.name == "LeftGoal" || col.gameObject.name == "RightGoal"))
+        // LeftGoal or RightGoal
+        if ((col.gameObject.name == "LeftGoal") || (col.gameObject.name == "RightGoal"))
         {
-            if(col.gameObject.name == "LeftGoal")
-            {
-                uIScoreUpdate("RightScoreUI");
-            } 
-            if(col.gameObject.name == "RightGoal")
-            {
-                uIScoreUpdate("LeftScoreUI");
-            }
-            transform.position = new Vector2(0, 0);
+
+            gameObject.transform.position = new Vector2(0, 0);
+
         }
 
     }
